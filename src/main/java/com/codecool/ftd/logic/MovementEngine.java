@@ -5,23 +5,21 @@ import com.codecool.ftd.data.Position;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class MovementEngine {
 
-    private static final Map<String, Position> MOVEMENT_OPTIONS =
-            Map.of(
-                    "forward", new Position(1, 0, 0),
-                    "backward", new Position(-1, 0, 0),
-                    "right", new Position(0, 1, 0),
-                    "left", new Position(0, -1, 0)
-            );
+    private final MovementInterpreter interpreter;
+
+    public MovementEngine(MovementInterpreter interpreter) {
+        this.interpreter = interpreter;
+    }
 
     public void move(Drone drone, String command) {
-        Position currentPosition = drone.getPosition();
-        Position movement = MOVEMENT_OPTIONS.get(command);
 
-        if (movement != null) {
+        Position movement = this.interpreter.interpretCommand(command);
+
+        if (!movement.equals(new Position(0, 0, 0))) {
+            Position currentPosition = drone.getPosition();
             Position newPosition = new Position(
                     currentPosition.x() + movement.x(),
                     currentPosition.y() + movement.y(),
@@ -29,11 +27,11 @@ public class MovementEngine {
             );
             drone.setPosition(newPosition);
         } else {
-            System.out.println("Invalid command");
+            System.out.println("Invalid command!");
         }
     }
 
     public List<String> getCommands() {
-        return new ArrayList<>(MOVEMENT_OPTIONS.keySet());
+        return new ArrayList<>(List.of("forward", "backward", "right", "left"));
     }
 }
