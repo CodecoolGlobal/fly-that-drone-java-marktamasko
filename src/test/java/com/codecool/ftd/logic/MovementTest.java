@@ -70,10 +70,10 @@ class MovementTest {
         MovementInterpreter interpreter = new MovementInterpreter();
         MovementEngine engine = new MovementEngine(interpreter);
         Drone drone = new Drone(current);
-        Position result = drone.getPosition();
 
         // Act
         engine.move(drone, command);
+        Position result = drone.getPosition();
 
         // Assert
         assertEquals(expected, result);
