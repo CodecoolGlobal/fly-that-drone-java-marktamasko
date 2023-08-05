@@ -1,5 +1,6 @@
 package com.codecool.ftd.logic;
 
+import com.codecool.ftd.data.Drone;
 import com.codecool.ftd.data.Position;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -63,11 +64,18 @@ class MovementTest {
 
     @ParameterizedTest
     @MethodSource("parameters")
-    void move(Position expected, Position current, String command) {
+    void testMove(Position expected, Position current, String command) {
 
-        // To be implemented
+        // Arrange
+        MovementInterpreter interpreter = new MovementInterpreter();
+        MovementEngine engine = new MovementEngine(interpreter);
+        Drone drone = new Drone(current);
+        Position result = drone.getPosition();
 
-        Position result = null;
+        // Act
+        engine.move(drone, command);
+
+        // Assert
         assertEquals(expected, result);
     }
 

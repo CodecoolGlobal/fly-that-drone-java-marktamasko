@@ -17,7 +17,9 @@ public class MovementInterpreter {
                     "forward-left", new Position(1, -1, 0),
                     "forward-right", new Position(1, 1, 0),
                     "backward-left", new Position(-1, -1, 0),
-                    "backward-right", new Position(-1, 1, 0)
+                    "backward-right", new Position(-1, 1, 0),
+                    "up", new Position(0, 0, 1),
+                    "down", new Position(0, 0, -1)
             );
 
     public MovementInterpreter() {
@@ -29,6 +31,6 @@ public class MovementInterpreter {
     }
 
     public Position interpretCommand(String command) {
-        return this.movements.getOrDefault(command, new Position(0, 0, 0));
+        return this.movements.getOrDefault(command.toLowerCase(), new Position(0, 0, 0));
     }
 }
