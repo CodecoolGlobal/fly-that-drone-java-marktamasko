@@ -13,7 +13,11 @@ public class MovementInterpreter {
                     "forward", new Position(1, 0, 0),
                     "backward", new Position(-1, 0, 0),
                     "right", new Position(0, 1, 0),
-                    "left", new Position(0, -1, 0)
+                    "left", new Position(0, -1, 0),
+                    "forward-left", new Position(1, -1, 0),
+                    "forward-right", new Position(1, 1, 0),
+                    "backward-left", new Position(-1, -1, 0),
+                    "backward-right", new Position(-1, 1, 0)
             );
 
     public MovementInterpreter() {

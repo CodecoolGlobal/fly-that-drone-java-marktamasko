@@ -32,6 +32,6 @@ public class MovementEngine {
     }
 
     public List<String> getCommands() {
-        return new ArrayList<>(List.of("forward", "backward", "right", "left"));
+        return new ArrayList<>(this.interpreter.getMovements().keySet());
     }
 }
