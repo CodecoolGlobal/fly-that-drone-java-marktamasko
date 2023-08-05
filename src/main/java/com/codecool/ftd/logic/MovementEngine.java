@@ -27,7 +27,8 @@ public class MovementEngine {
             );
             drone.setPosition(newPosition);
         } else {
-            System.out.println("Invalid command!");
+            System.out.println("Invalid command! " + command);
+            throw new IllegalArgumentException("Invalid command! " + command);
         }
     }
 

@@ -31,6 +31,10 @@ public class MovementInterpreter {
     }
 
     public Position interpretCommand(String command) {
+        if (command == null) {
+            System.out.println("Command is null");
+            throw new IllegalArgumentException("Command can't be null");
+        }
         return this.movements.getOrDefault(command.toLowerCase(), new Position(0, 0, 0));
     }
 }
