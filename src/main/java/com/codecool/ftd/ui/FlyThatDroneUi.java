@@ -5,8 +5,6 @@ import com.codecool.ftd.logic.MovementEngine;
 
 import java.util.Scanner;
 
-import static java.util.stream.Collectors.joining;
-
 public class FlyThatDroneUi {
     private final Drone drone;
     private final MovementEngine movementEngine;
@@ -32,13 +30,12 @@ public class FlyThatDroneUi {
     }
 
     private String getMovementNames() {
-        return movementEngine.getCommands().stream()
-                .collect(joining(", "));
+        return String.join(", ", movementEngine.getCommands());
     }
 
     private void handleChoice() {
         System.out.print("\nChoice: ");
-        String choice = scanner.next().toLowerCase();
+        String choice = scanner.next();
         movementEngine.move(drone, choice);
     }
 }
