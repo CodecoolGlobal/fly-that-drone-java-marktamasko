@@ -16,7 +16,7 @@ public class MovementEngine {
 
     public void move(Drone drone, String command) {
 
-        Position movement = this.interpreter.interpretCommand(command);
+        Position movement = this.interpreter.validateCommand(command);
 
         if (!movement.equals(new Position(0, 0, 0))) {
             Position currentPosition = drone.getPosition();
@@ -33,6 +33,6 @@ public class MovementEngine {
     }
 
     public List<String> getCommands() {
-        return new ArrayList<>(this.interpreter.getMovements().keySet());
+        return new ArrayList<>(this.interpreter.getMovementProviderKeys());
     }
 }

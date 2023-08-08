@@ -1,40 +1,29 @@
 package com.codecool.ftd.logic;
 
 import com.codecool.ftd.data.Position;
+import com.codecool.ftd.logic.directions.*;
 
-import java.util.Map;
+import java.util.Set;
 
 public class MovementInterpreter {
 
-    private final Map<String, Position> movements;
+    private final MovementProvider provider;
 
-    private static final Map<String, Position> DEFAULT_MOVEMENT =
-            Map.of(
-                    "forward", new Position(1, 0, 0),
-                    "backward", new Position(-1, 0, 0),
-                    "right", new Position(0, 1, 0),
-                    "left", new Position(0, -1, 0),
-                    "forward-left", new Position(1, -1, 0),
-                    "forward-right", new Position(1, 1, 0),
-                    "backward-left", new Position(-1, -1, 0),
-                    "backward-right", new Position(-1, 1, 0),
-                    "up", new Position(0, 0, 1),
-                    "down", new Position(0, 0, -1)
-            );
+    public MovementInterpreter(MovementProvider provider) {
 
-    public MovementInterpreter() {
-        this.movements = DEFAULT_MOVEMENT;
+        this.provider = provider;
     }
 
-    public Map<String, Position> getMovements() {
-        return movements;
+    public Set<String> getMovementProviderKeys() {
+        return this.provider.getMovements().keySet();
     }
 
-    public Position interpretCommand(String command) {
+    public Position validateCommand(String command) {
         if (command == null) {
             System.out.println("Command is null");
             throw new IllegalArgumentException("Command can't be null");
         }
-        return this.movements.getOrDefault(command.toLowerCase(), new Position(0, 0, 0));
+        MovementLogic logic = this.provider.getMovements().getOrDefault(command.toLowerCase(), new DefaultMovement());
+        return logic.interpretCommand(command);
     }
 }

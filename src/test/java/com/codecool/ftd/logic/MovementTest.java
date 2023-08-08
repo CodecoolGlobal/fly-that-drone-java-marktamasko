@@ -2,7 +2,6 @@ package com.codecool.ftd.logic;
 
 import com.codecool.ftd.data.Drone;
 import com.codecool.ftd.data.Position;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -67,7 +66,8 @@ class MovementTest {
     void testMove(Position expected, Position current, String command) {
 
         // Arrange
-        MovementInterpreter interpreter = new MovementInterpreter();
+        MovementProvider provider = new MovementProvider();
+        MovementInterpreter interpreter = new MovementInterpreter(provider);
         MovementEngine engine = new MovementEngine(interpreter);
         Drone drone = new Drone(current);
 
