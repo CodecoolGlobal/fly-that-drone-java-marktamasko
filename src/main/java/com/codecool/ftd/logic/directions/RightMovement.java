@@ -7,6 +7,6 @@ public class RightMovement implements MovementLogic {
 
     @Override
     public Position interpretCommand(String command) {
-        return new Position(1, 0, 0);
+        return new Position(0, 1, 0);
     }
 }
